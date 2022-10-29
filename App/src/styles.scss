@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: prompt;
+    src: url(assets/fonts/Prompt-Regular.ttf) format("opentype");
+}
+
+* {
+    font-family: prompt;
+}

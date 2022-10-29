@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./db/main.db"
+}
+
+model documents {
+  id        Int      @id @unique @default(autoincrement())
+  filename  String
+  filetype  String
+  binary    Bytes
+  createdAt DateTime @default(now())
+  studentId String
+  students  students @relation(fields: [studentId], references: [id])
+}
+
+model scans {
+  id        Int      @id @unique @default(autoincrement())
+  scanedAt  DateTime
+  studentId String
+  students  students @relation(fields: [studentId], references: [id])
+}
+
+model students {
+  id        String      @id @unique
+  name      String
+  photo     Bytes?
+  tag       String?     @unique
+  documents documents[]
+  scans     scans[]
+  logs      logs[]
+}
+
+model logs {
+  id        Int      @id @unique @default(autoincrement())
+  info      String
+  studentId String
+  students  students @relation(fields: [studentId], references: [id])
+}
