@@ -7,6 +7,7 @@ const app = express();
 const port = process.env.port;
 process.env.adminpass = Buffer.from(process.env.adminpass).toString('base64');
 
+app.use(express.json());
 app.get('/', (req, res) => res.send('hello world'));
 
 app.use('/api/public', publicapi);

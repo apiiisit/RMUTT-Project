@@ -37,6 +37,7 @@ model students {
 model logs {
   id        Int      @id @unique @default(autoincrement())
   info      String
+  createdAt DateTime @default(now())
   studentId String
   students  students @relation(fields: [studentId], references: [id])
 }

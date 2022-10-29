@@ -8,7 +8,7 @@
 1. ``pnpm install``
 2. ``pnpm update``
 3. ``npx prisma migrate reset -f``
-4. ``npx prisma migrate dev --name init``
+4. ``npx prisma db push``
 5. ``npx prisma generate``
 
 ## Run
