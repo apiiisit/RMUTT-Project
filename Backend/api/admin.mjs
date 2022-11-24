@@ -27,8 +27,8 @@ adminapi.post('/students/add', async (req, res) => {
       try {
         await prisma.students.create({ data: { id, name } });
       } catch (error) {
-        // P2002 Already have this primary key in the table
-        // So we ignore this
+        // P2002 already have this primary key in the table
+        // so we ignore this
         if (error.code !== 'P2002') {
           console.log('error:', error);
           return res.status(500).json({ error: error.message });
@@ -44,8 +44,24 @@ adminapi.post('/students/add', async (req, res) => {
 // return all students
 adminapi.get('/students', async (req, res) => {
   try {
-    const data = await prisma.students.findMany();
-    return res.json({ error: false, data });
+    const query = await prisma.students.findMany();
+    return res.json({ error: false, data: query });
+  } catch (error) {
+    return res.status(500).json({ error: error.message, data: [] });
+  }
+});
+// check rfid
+adminapi.get('/scan/rfid', async (req, res) => {
+  const rfid = req.body.rfid;
+  try {
+    const query = await prisma.students.findMany({
+      where: {
+        tag: {
+          equals: rfid
+        }
+      }
+    });
+    return res.json({ error: false, data: query });
   } catch (error) {
     return res.status(500).json({ error: error.message, data: [] });
   }
