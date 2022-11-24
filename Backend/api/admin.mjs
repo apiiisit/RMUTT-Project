@@ -53,13 +53,15 @@ adminapi.get('/students', async (req, res) => {
 // check rfid
 adminapi.get('/scan/rfid', async (req, res) => {
   const rfid = req.body.rfid;
+  if (!rfid) return res.json({ error: false, data: [] });
   try {
     const query = await prisma.students.findMany({
       where: {
         tag: {
           equals: rfid
         }
-      }
+      },
+      take: 1
     });
     return res.json({ error: false, data: query });
   } catch (error) {
