@@ -1,0 +1,13 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "author": {
+    "name": "apiiisit",
+    "email": "apiiisit@outlook.com"
+  },
+  "main": "main.js",
+  "private": true,
+  "dependencies": {
+    "node-hid": "^2.1.2"
+  }
+}

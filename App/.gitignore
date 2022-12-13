@@ -2,18 +2,23 @@
 
 # Compiled output
 /dist
+/release
 /tmp
 /out-tsc
 /bazel-out
+app/*.js
+app/*.js.map
+
+# Angular
+proxy.config.json
 
 # Node
-/node_modules
+node_modules
 npm-debug.log
 yarn-error.log
-pnpm-lock.yaml
+package-lock.json
 
 # IDEs and editors
-.angular
 .idea/
 .project
 .classpath
@@ -24,7 +29,6 @@ pnpm-lock.yaml
 
 # Visual Studio Code
 .vscode/*
-.vscode
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json

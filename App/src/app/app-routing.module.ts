@@ -1,29 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthenticationComponent } from './authentication/authentication.component';
-import { LoginComponent } from './authentication/login/login.component';
-import { DashboardComponent } from './rmutt/dashboard/dashboard.component';
-import { RmuttComponent } from './rmutt/rmutt.component';
+import { AdminComponent } from './admin/admin.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { ScanComponent } from './admin/scan/scan.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'rmutt/auth', pathMatch: 'full' },
+  { path: '', redirectTo: 'admin', pathMatch: 'full' },
   {
-    path: 'rmutt/auth',
-    component: AuthenticationComponent,
+    path: 'admin',
+    component: AdminComponent,
     children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
-        path: '',
-        component: LoginComponent
-      }
-    ]
-  },
-  {
-    path: 'rmutt',
-    component: RmuttComponent,
-    children: [
-      {
-        path: '',
+        path: 'dashboard',
         component: DashboardComponent
+      },
+      {
+        path: 'scan',
+        component: ScanComponent
       }
     ]
   }
