@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'development') {
   process.env.TOKEN_SECRET = randomBytes(64).toString('hex');
 }
 app.use(express.json());
-app.use('/', publicapi);
-app.use('/admin', adminapi);
+app.use('/api/', publicapi);
+app.use('/api/admin', adminapi);
 
 app.listen(port, () => console.log(`Listening on http://localhost:${port}/`));
