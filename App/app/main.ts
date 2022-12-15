@@ -7,14 +7,15 @@ let win: BrowserWindow = null;
 const args = process.argv.slice(1);
 const serve = args.some(val => val === '--serve');
 
-const deviceInfo: any = devices().find((d) => d.vendorId === 0x1a86);
-const device = new HID(deviceInfo.path);
-
 ipcMain.on('start', (event, data) => {
-  device.on('data', (data) => {
-    const tagRFiD = data.subarray(1, 33).toString('hex');
-    event.reply('tag', tagRFiD);
-  });
+  const deviceInfo: any = devices().find((d) => d.vendorId === 0x1a86);
+  if (deviceInfo) {
+    const device = new HID(deviceInfo.path);
+    device.on('data', (data) => {
+      const tagRFiD = data.subarray(1, 33).toString('hex');
+      event.reply('tag', tagRFiD);
+    });
+  }
 });
 
 function createWindow(): BrowserWindow {
