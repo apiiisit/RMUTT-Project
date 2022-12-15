@@ -36,6 +36,7 @@ package-lock.json
 .history/*
 
 # Miscellaneous
+.angular
 /.angular/cache
 .sass-cache/
 /connect.lock
