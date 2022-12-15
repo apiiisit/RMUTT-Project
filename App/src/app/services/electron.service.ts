@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IpcRenderer, ipcRenderer } from 'electron';
+import { IpcRenderer } from 'electron';
 
 @Injectable({
   providedIn: 'root'
