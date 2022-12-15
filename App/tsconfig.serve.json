@@ -14,7 +14,7 @@
     ]
   },
   "files": [
-    "app/main.ts"
+    "electron/main.ts"
   ],
   "exclude": [
     "node_modules",

@@ -4,9 +4,9 @@
 PrimeNG and package your project with Angular and Electron and have RFiD Reader connection.
 
 ## Requirement
-- NodeJS LTS >= 18.12.1
+- Angular CLI >= 14.2.10
+- NodeJS LTS >= 16.19.0
 - node-hid >= 2.1.2
-- npm
 
 
 ## Project structure

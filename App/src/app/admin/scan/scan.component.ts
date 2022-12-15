@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ElectronService } from '../../services/electron.service';
 
 @Component({
@@ -6,8 +6,11 @@ import { ElectronService } from '../../services/electron.service';
   templateUrl: './scan.component.html',
   styleUrls: ['./scan.component.scss']
 })
-export class ScanComponent {
+export class ScanComponent implements OnInit {
 
   constructor(private electronService: ElectronService) { }
+
+  ngOnInit(): void {
+  }
 
 }
