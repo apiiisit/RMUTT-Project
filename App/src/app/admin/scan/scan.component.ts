@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ElectronService } from '../../services/electron.service';
 
 @Component({
   selector: 'app-scan',
@@ -8,7 +7,7 @@ import { ElectronService } from '../../services/electron.service';
 })
 export class ScanComponent implements OnInit {
 
-  constructor(private electronService: ElectronService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

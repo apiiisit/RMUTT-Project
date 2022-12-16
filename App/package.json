@@ -5,16 +5,15 @@
     "name": "apiiisit",
     "email": "apiiisit@outlook.com"
   },
-  "main": "electron/main.js",
   "private": true,
+  "main": "app/main.js",
   "scripts": {
-    "ng": "ng",
-    "start": "npm-run-all -p electron:serve ng:serve",
-    "ng:serve": "ng serve --proxy-config proxy.config.json",
-    "build": "npm run electron:serve-tsc && ng build --base-href ./",
-    "electron:serve": "wait-on tcp:4200 && npm run electron:serve-tsc && electron . --serve",
-    "electron:serve-tsc": "tsc -p tsconfig.serve.json",
-    "electron:build": "npm run build && electron-builder build --publish=never"
+    "start": "npm-run-all -p start:app start:web",
+    "start:web": "ng serve --proxy-config proxy.config.json",
+    "start:app": "wait-on tcp:4200 && npm run electron:tsc && electron . --serve",
+    "build": "npm run electron:tsc && npm run build:web && electron-builder build --publish=never",
+    "build:web": "ng build --base-href ./",
+    "electron:tsc": "tsc -p tsconfig.serve.json"
   },
   "dependencies": {
     "@angular/animations": "^14.2.0",
@@ -25,7 +24,11 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "primeflex": "^3.3.0",
+    "primeicons": "^6.0.1",
+    "primeng": "^14.2.3",
     "rxjs": "~7.5.0",
+    "sweetalert2": "^11.6.15",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
@@ -44,14 +47,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "node-hid": "^2.1.2",
     "npm-run-all": "^4.1.5",
-    "path-browserify": "^1.0.1",
-    "primeflex": "^3.3.0",
-    "primeicons": "^6.0.1",
-    "primeng": "^14.2.3",
-    "sweetalert2": "^11.6.15",
-    "ts-node": "^10.9.1",
     "typescript": "~4.7.2",
     "wait-on": "^6.0.1"
   }

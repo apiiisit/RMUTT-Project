@@ -5,8 +5,8 @@
     "name": "apiiisit",
     "email": "apiiisit@outlook.com"
   },
-  "main": "main.js",
   "private": true,
+  "main": "main.js",
   "dependencies": {
     "node-hid": "^2.1.2"
   }

@@ -29,4 +29,6 @@ npm install
 | Command                  | Description                          |
 |--------------------------|--------------------------------------|
 | `npm run start`          | Run desktop applications (DEV mode)  |
-| `npm run electron:build` | Builds your desktop applications     |
+| `npm run start:web`      | Run web application                  |
+| `npm run build`          | Builds your desktop applications     |
+| `npm run build:web`      | Builds your web application          |

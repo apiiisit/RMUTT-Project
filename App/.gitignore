@@ -6,17 +6,16 @@
 /tmp
 /out-tsc
 /bazel-out
-app/*.js
-app/*.js.map
-
-# Angular
-proxy.config.json
+/app/*.js
+/app/*.js.map
 
 # Node
 node_modules
 npm-debug.log
 yarn-error.log
-package-lock.json
+
+# Angular
+proxy.config.json
 
 # IDEs and editors
 .idea/
@@ -36,7 +35,7 @@ package-lock.json
 .history/*
 
 # Miscellaneous
-.angular
+.angular/*
 /.angular/cache
 .sass-cache/
 /connect.lock
