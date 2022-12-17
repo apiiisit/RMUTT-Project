@@ -1,0 +1,25 @@
+.display {
+    background-color: #F2F9FE;
+    display: flex;
+    flex-direction: column;
+    width: 15vw;
+    height: 90vh;
+}
+
+p {
+    font-size: 18px;
+    margin-left: 2rem;
+}
+
+.menu {
+    cursor: pointer;
+}
+
+.menu:hover,
+.active {
+    background-color: #D3ECFE;
+
+    p {
+        font-weight: bold;
+    }
+}

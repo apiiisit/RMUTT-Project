@@ -1,1 +1,18 @@
-<router-outlet></router-outlet>
+<div class="row">
+    <app-navbar></app-navbar>
+</div>
+<div class="row">
+    <div class="col left">
+        <app-menu></app-menu>
+    </div>
+    
+    <div class="col right">
+        <p-scrollPanel [style]="{width: '84.5vw', height: '84.5vh'}" styleClass="custombar">
+            <div class="main">
+                <router-outlet></router-outlet>
+            </div>
+        </p-scrollPanel>
+    </div>
+
+    
+</div>

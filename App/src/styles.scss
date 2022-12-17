@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: prompt;
+    src: url(assets/fonts/Prompt-Regular.ttf) format("opentype");
+}
+
+* {
+    font-family: prompt;
+}
+
+html,
+body {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+.p-scrollpanel {
+    p {
+        padding: .5rem;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    &.custombar {
+        .p-scrollpanel-wrapper {
+            border-right: 9px solid var(--layer-1);
+        }
+
+        .p-scrollpanel-bar {
+            background-color: var(--primary-color);
+            opacity: 1;
+            transition: background-color .2s;
+
+            &:hover {
+                background-color: #007ad9;
+            }
+        }
+    }
+}

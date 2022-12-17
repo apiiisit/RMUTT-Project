@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen, ipcMain } from 'electron';
+import { app, BrowserWindow, screen } from 'electron';
 import { devices, HID } from 'node-hid';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -6,17 +6,6 @@ import * as fs from 'fs';
 let win: BrowserWindow = null;
 const args = process.argv.slice(1);
 const serve = args.some(val => val === '--serve');
-
-ipcMain.on('start', (event, data) => {
-  const deviceInfo: any = devices().find((d) => d.vendorId === 0x1a86);
-  if (deviceInfo) {
-    const device = new HID(deviceInfo.path);
-    device.on('data', (data) => {
-      const tagRFiD = data.subarray(1, 33).toString('hex');
-      event.reply('tag', tagRFiD);
-    });
-  }
-});
 
 function createWindow(): BrowserWindow {
 
@@ -72,6 +61,15 @@ try {
   // Added 400 ms to fix the black background issue while using transparent window. More detais at https://github.com/electron/electron/issues/15947
   // app.on('ready', () => setTimeout(createWindow, 400));
   app.on('ready', () => createWindow());
+
+  const deviceInfo: any = devices().find((d) => d.vendorId === 0x1a86);
+  if (deviceInfo) {
+    const device = new HID(deviceInfo.path);
+    device.on('data', (data) => {
+      const RFiDTag = data.subarray(1, 33).toString('hex');
+      win.webContents.send('RFiDTag', RFiDTag)
+    });
+  }
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {

@@ -9,7 +9,7 @@
   "main": "app/main.js",
   "scripts": {
     "start": "npm-run-all -p start:app start:web",
-    "start:web": "ng serve --proxy-config proxy.config.json",
+    "start:web": "ng serve",
     "start:app": "wait-on tcp:4200 && npm run electron:tsc && electron . --serve",
     "build": "npm run electron:tsc && npm run build:web && electron-builder build --publish=never",
     "build:web": "ng build --base-href ./",

@@ -1,0 +1,20 @@
+.display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../../assets/images/rmutt-background.png);
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.form-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-login .input {
+    margin-bottom: 1.5rem;
+}

@@ -1,1 +1,22 @@
-<p>login works!</p>
+<div class="display">
+    <p-card [style]="{'width': '30rem'}">
+        <div class="form-login">
+            <img src="assets/images/rmutt-logo.png" width="100" alt="rmutt-logo">
+            <h2>เข้าสู่ระบบ</h2>
+
+            <p-message *ngIf="msg" severity="error" [text]="msg" styleClass="mb-4"></p-message>
+            
+            <span class="input p-float-label">
+                <input type="text" pInputText [(ngModel)]="username" [style]="{'width': '20rem'}">
+                <label for="username">Internet Account</label>
+            </span>
+
+            <span class="input p-float-label">
+                <input type="password" pInputText [(ngModel)]="password" [style]="{'width': '20rem'}">
+                <label for="password">Password</label>
+            </span>
+
+            <p-button label="เข้าสู่ระบบ" icon="pi pi-sign-in" iconPos="right" (click)="btnLogin()"></p-button>
+        </div>
+    </p-card>
+</div>
