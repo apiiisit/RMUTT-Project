@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 import express from 'express';
+import cors from 'cors';
 import publicapi from './api/public.mjs';
 import adminapi from './api/admin.mjs';
 import { randomBytes } from 'crypto';
@@ -10,6 +11,7 @@ process.env.MASTERPASSWORDB64 = Buffer.from(process.env.MASTERPASSWORD).toString
 if (process.env.NODE_ENV === 'development') {
   process.env.TOKEN_SECRET = randomBytes(64).toString('hex');
 }
+app.use(cors());
 app.use(express.json());
 app.use('/api/', publicapi);
 app.use('/api/admin', adminapi);

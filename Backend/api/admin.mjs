@@ -51,8 +51,8 @@ adminapi.get('/students', async (req, res) => {
   }
 });
 // check rfid
-adminapi.get('/scan/rfid', async (req, res) => {
-  const rfid = req.body.rfid;
+adminapi.get('/scan/rfid/:rfid', async (req, res) => {
+  const rfid = req.params.rfid;
   if (!rfid) return res.json({ error: false, data: [] });
   try {
     const query = await prisma.students.findMany({
