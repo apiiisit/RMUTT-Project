@@ -16,6 +16,7 @@ export class ScanComponent implements OnInit {
   }
 
   std!: any;
+  found!: boolean;
 
   constructor(
     private _ngZone: NgZone,
@@ -32,6 +33,7 @@ export class ScanComponent implements OnInit {
             if (res.error) {
 
             } else {
+              this.found = res.data.length === 0;
               this.std = res.data[0];
             }
           })

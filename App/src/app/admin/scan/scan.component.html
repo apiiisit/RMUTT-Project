@@ -1,4 +1,15 @@
-<p>scan works!</p>
-{{std|json}}
+<div class="display">
+    <h1 *ngIf="found">ไม่พบข้อมูล</h1>
+    <h1>พิธีการเข้ารับพระราชทานปริญญาบัตร</h1>
+    <p>มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี</p>
+    <p>ครั้งที่ 1 ปีการศึกษา 2565</p>
+    <p>ซ้อมย่อย</p>
+    <img [src]="'https://oreg3.rmutt.ac.th/registrar/getstudentimagemobile.asp?id='+std?.id || ''" alt="std-image" height="250">
+    <p>วันจันทร์ที่ 5 ธันวาคม 2565 (เช้า ครั้งที่ 1)</p>
+    <p>ชื่อ-สกุล {{std?.name || '...'}} รหัสประจำตัว {{std?.id || '...'}}</p>
+    <p>สาขา วิทยาการคอมพิวเตอร์</p>
+    <p>ปริญญาตรี</p>
+    <p>เกียรตินิยมอันดับ 1</p>
+    <p>แถวที่ 1 ลำดับที่ 5</p>
+</div>
 
-<img *ngIf="std" src="https://oreg3.rmutt.ac.th/registrar/getstudentimagemobile.asp?id={{std.id}}" alt="std-image">

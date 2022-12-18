@@ -1,18 +1,16 @@
-<div class="row">
-    <app-navbar></app-navbar>
+<div class="grid">
+    <div class="col">
+        <app-navbar></app-navbar>
+    </div>
 </div>
-<div class="row">
-    <div class="col left">
+
+<div class="grid">
+    <div class="col-fixed menu">
         <app-menu></app-menu>
     </div>
-    
-    <div class="col right">
-        <p-scrollPanel [style]="{width: '84.5vw', height: '84.5vh'}" styleClass="custombar">
-            <div class="main">
-                <router-outlet></router-outlet>
-            </div>
+    <div class="col">
+        <p-scrollPanel [style]="{'margin-right': '0.01vw', height: '90vh'}" styleClass="custombar">
+            <router-outlet></router-outlet>
         </p-scrollPanel>
     </div>
-
-    
 </div>

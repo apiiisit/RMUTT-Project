@@ -39,8 +39,6 @@ export class LoginComponent implements OnInit {
           timer: 1500
         }).then(() => this.msg = res.error);
       } else {
-        console.log(res);
-        
         Swal.fire({
           icon: 'success',
           title: 'เข้าสู่ระบบสำเร็จ',
