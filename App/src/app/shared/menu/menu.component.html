@@ -1,14 +1,14 @@
 <div class="display">
-    <div class="menu active" routerLink="/admin">
+    <div class="menu {{activeMenu('admin')}}" routerLink="/admin">
         <p>หน้าแรก</p>
     </div>
-    <div class="menu" routerLink="scan">
+    <div class="menu {{activeMenu('scan')}}" routerLink="scan">
         <p>สแกนบัตร</p>
     </div>
-    <div class="menu">
+    <div class="menu {{activeMenu('view')}}" routerLink="view">
         <p>ดูรายชื่อบัณฑิต</p>
     </div>
-    <div class="menu">
+    <div class="menu {{activeMenu('manage')}}" routerLink="manage">
         <p>จัดการข้อมูลบัณฑิต</p>
     </div>
     <div class="menu">

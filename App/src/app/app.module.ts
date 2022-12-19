@@ -24,6 +24,8 @@ import { ScanComponent } from './admin/scan/scan.component';
 import { LoginComponent } from './auth/login/login.component';
 import { MenuComponent } from './shared/menu/menu.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { ViewStdComponent } from './admin/view-std/view-std.component';
+import { ManageStdComponent } from './admin/manage-std/manage-std.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     ScanComponent,
     LoginComponent,
     MenuComponent,
-    NavbarComponent
+    NavbarComponent,
+    ViewStdComponent,
+    ManageStdComponent
   ],
   imports: [
     BrowserModule,
