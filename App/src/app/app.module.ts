@@ -12,6 +12,8 @@ import { ButtonModule } from 'primeng/button';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { TableModule } from 'primeng/table';
+
 
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
@@ -54,7 +56,8 @@ import { ManageStdComponent } from './admin/manage-std/manage-std.component';
     ButtonModule,
     MessagesModule,
     MessageModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    TableModule
   ],
   providers: [{
     provide: LocationStrategy,

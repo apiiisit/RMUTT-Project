@@ -1,1 +1,41 @@
-<p>view-std works!</p>
+<div class="card">
+    <p-table #dt [value]="stdList" [rows]="10" [paginator]="true" [globalFilterFields]="['id', 'name']" [tableStyle]="{'min-width': '75rem'}"
+        [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="searchStd(dt, $event)" placeholder="Search..." />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="id">รหัสนักศึกษา <p-sortIcon field="id"></p-sortIcon></th>
+                <th pSortableColumn="name">ชื่อ-สกุล <p-sortIcon field="name"></p-sortIcon></th>
+                <th>รูปภาพ</th>
+                <th>ปริญญา</th>
+                <th>เกียรตินิยม</th>
+                <th>แถวที่</th>
+                <th>ลำดับที่</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-std>
+            <tr>
+                <td>{{std.id}}</td>
+                <td>{{std.name}}</td>
+                <td><img src="assets/images/example-std.png" [alt]="std.name" width="100" class="shadow-4" /></td>
+                <td>ตรี</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{stdList ? stdList.length : 0 }} products.
+            </div>
+        </ng-template>
+    </p-table>
+</div>

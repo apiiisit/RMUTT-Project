@@ -1,6 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { IpcRenderer } from 'electron';
-import { ScanService } from '../../services/scan.service';
+import { StdService } from '../../services/std.service';
 
 @Component({
   selector: 'app-scan',
@@ -20,7 +20,7 @@ export class ScanComponent implements OnInit {
 
   constructor(
     private _ngZone: NgZone,
-    private scanService: ScanService
+    private stdService: StdService
   ) { }
 
 
@@ -29,7 +29,7 @@ export class ScanComponent implements OnInit {
       this.ipcRenderer = window.require('electron').ipcRenderer;
       this.ipcRenderer.on('RFiDTag', (event, data) => {
         this._ngZone.run(() => {
-          this.scanService.getStd(data).subscribe(res => {
+          this.stdService.scanRFiD(data).subscribe(res => {
             if (res.error) {
 
             } else {
