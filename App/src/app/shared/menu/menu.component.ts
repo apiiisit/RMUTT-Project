@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -7,12 +7,14 @@ import { Subscription } from 'rxjs';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
 
   event$!: Subscription;
   url!: string;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.event$ = this.router.events.subscribe(event => {
@@ -20,7 +22,7 @@ export class MenuComponent implements OnInit {
         this.url = event.url;
       }
     })
-    
+
     if (!this.url) this.url = this.router.url;
   }
 

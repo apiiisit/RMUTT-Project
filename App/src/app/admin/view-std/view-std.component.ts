@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Table } from 'primeng/table';
 import { StdService } from '../../services/std.service';
 
@@ -7,11 +7,13 @@ import { StdService } from '../../services/std.service';
   templateUrl: './view-std.component.html',
   styleUrls: ['./view-std.component.scss']
 })
-export class ViewStdComponent implements OnInit {
+export class ViewStdComponent {
 
   stdList!: any[];
 
-  constructor(private stdService: StdService) { }
+  constructor(
+    private stdService: StdService
+  ) { }
 
   ngOnInit(): void {
     this.stdService.getStd().subscribe(res => {

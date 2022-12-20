@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2'
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2'
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   username!: string;
   password!: string;
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['admin'])
         })
       }
-      
+
     })
   }
 

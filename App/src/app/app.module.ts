@@ -14,20 +14,19 @@ import { MessageModule } from 'primeng/message';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TableModule } from 'primeng/table';
 
-
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './user/user.component';
 import { AuthComponent } from './auth/auth.component';
 import { SharedComponent } from './shared/shared.component';
-import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ScanComponent } from './admin/scan/scan.component';
-import { LoginComponent } from './auth/login/login.component';
-import { MenuComponent } from './shared/menu/menu.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ViewStdComponent } from './admin/view-std/view-std.component';
 import { ManageStdComponent } from './admin/manage-std/manage-std.component';
+import { LoginComponent } from './auth/login/login.component';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { MenuComponent } from './shared/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -36,14 +35,14 @@ import { ManageStdComponent } from './admin/manage-std/manage-std.component';
     UserComponent,
     AuthComponent,
     SharedComponent,
-    PageNotFoundComponent,
     DashboardComponent,
     ScanComponent,
-    LoginComponent,
-    MenuComponent,
-    NavbarComponent,
     ViewStdComponent,
-    ManageStdComponent
+    ManageStdComponent,
+    LoginComponent,
+    PageNotFoundComponent,
+    NavbarComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

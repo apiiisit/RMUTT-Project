@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IpcRenderer } from 'electron';
 import { StdService } from '../../services/std.service';
 
@@ -7,7 +7,7 @@ import { StdService } from '../../services/std.service';
   templateUrl: './scan.component.html',
   styleUrls: ['./scan.component.scss']
 })
-export class ScanComponent implements OnInit {
+export class ScanComponent {
 
   ipcRenderer!: IpcRenderer;
 
@@ -19,10 +19,9 @@ export class ScanComponent implements OnInit {
   found!: boolean;
 
   constructor(
-    private _ngZone: NgZone,
-    private stdService: StdService
+    private stdService: StdService,
+    private _ngZone: NgZone
   ) { }
-
 
   ngOnInit(): void {
     if (this.isElectron) {
@@ -40,7 +39,5 @@ export class ScanComponent implements OnInit {
         });
       });
     }
-
   }
-
 }
