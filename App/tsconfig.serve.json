@@ -1,23 +1,23 @@
 {
     "compilerOptions": {
-      "sourceMap": true,
-      "declaration": false,
-      "moduleResolution": "node",
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "module": "commonjs",
-      "target": "es2020",
-      "types": [],
-      "lib": [
-        "es2020",
-        "dom"
-      ]
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "commonjs",
+        "target": "ES2022",
+        "types": [],
+        "lib": [
+            "ES2022",
+            "dom"
+        ]
     },
     "files": [
-      "app/main.ts"
+        "app/main.ts"
     ],
     "exclude": [
-      "node_modules",
-      "**/*.spec.ts"
+        "node_modules",
+        "**/*.spec.ts"
     ]
-  }
+}

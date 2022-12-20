@@ -7,10 +7,11 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
 
+  private readonly api = environment.apiUrl;
+
   constructor(private http: HttpClient) { }
 
   login(formLogin: object) {
-    return this.http.post(`${environment.apiUrl}/login`, formLogin);
+    return this.http.post(`${this.api}/login`, formLogin);
   }
-
 }
