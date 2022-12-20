@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import fetch from 'node-fetch';
 import jwt from 'jsonwebtoken';
 const publicapi = Router();
 
