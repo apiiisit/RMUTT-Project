@@ -1,16 +1,13 @@
-<div class="grid">
-    <div class="col">
-        <app-navbar></app-navbar>
-    </div>
-</div>
-
-<div class="grid">
-    <div class="col-fixed menu">
-        <app-menu></app-menu>
-    </div>
-    <div class="col">
-        <p-scrollPanel [style]="{'margin-right': '0.01vw', height: '90vh'}" styleClass="custombar">
-            <router-outlet></router-outlet>
-        </p-scrollPanel>
+<app-navbar></app-navbar>
+<div class="card">
+    <div class="flex card-container blue-container overflow-hidden">
+        <div class="flex-none flex">
+            <app-menu></app-menu>
+        </div>
+        <div class="flex-grow-1">
+            <p-scrollPanel [style]="{height: '90vh'}" styleClass="custombar">
+                <router-outlet></router-outlet>
+            </p-scrollPanel>
+        </div>
     </div>
 </div>

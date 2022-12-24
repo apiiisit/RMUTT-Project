@@ -1,25 +1,42 @@
-.display {
+.layout {
     background-color: #F2F9FE;
     display: flex;
     flex-direction: column;
-    width: 15vw;
+    width: 230px;
     height: 90vh;
-}
-
-p {
-    font-size: 18px;
-    margin-left: 2rem;
 }
 
 .menu {
     cursor: pointer;
 }
 
-.menu:hover,
-.active {
+.menu p {
+    font-size: 18px;
+    margin-left: 2rem;
+}
+
+.menu:hover, .active {
     background-color: #D3ECFE;
 
     p {
         font-weight: bold;
+    }
+}
+
+.show-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    margin-top: 1.4rem;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+    .layout {
+        display: none;
+    }
+    .show-menu {
+        display: inline;
     }
 }

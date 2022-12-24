@@ -11,10 +11,13 @@ export class MenuComponent {
 
   event$!: Subscription;
   url!: string;
+  icon!: string;
 
   constructor(
     private router: Router
-  ) { }
+  ) {
+    this.icon = 'bars'
+  }
 
   ngOnInit(): void {
     this.event$ = this.router.events.subscribe(event => {
@@ -24,6 +27,7 @@ export class MenuComponent {
     })
 
     if (!this.url) this.url = this.router.url;
+
   }
 
   ngOnDestroy(): void {
@@ -33,6 +37,16 @@ export class MenuComponent {
   activeMenu(menu: string) {
     const path = this.url.split('/').at(-1);
     return path === menu ? 'active' : '';
+  }
+
+  showMenu() {
+    let toggle: boolean;
+    toggle = this.icon === 'bars'
+    this.icon = toggle ? 'times' : 'bars';
+
+    const layout = document.getElementById('menu')
+    layout!.style.display = toggle ? 'flex' : 'none';
+
   }
 
 }

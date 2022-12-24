@@ -1,6 +1,20 @@
-.display {
-    background-color: #2196F3;
+.navber {
     display: flex;
-    color: white;
+    background-color: #2196F3;
+    gap: 1vw;
     height: 10vh;
+    color: #FFF;
+    align-items: center;
+}
+
+@media screen and (max-width: 650px) {
+    h2 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    img {
+        margin-left: 4rem;
+    }
 }
