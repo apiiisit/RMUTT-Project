@@ -1,41 +1,83 @@
 <div class="card">
-    <p-table #dt [value]="stdList" [rows]="10" [paginator]="true" [globalFilterFields]="['id', 'name']"
-        [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    <p-table #dt [value]="stdList" responsiveLayout="stack" [rows]="10" [paginator]="true"
+        [globalFilterFields]="['id', 'name']" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="แสดง {first} ถึง {last} จากทั้งหมด {totalRecords} รายการ"
         [showCurrentPageReport]="true">
+
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="searchStd(dt, $event)" placeholder="Search..." />
+                    <input pInputText type="text" (input)="searchStd(dt, $event)" placeholder="ค้นหา..." />
                 </span>
             </div>
         </ng-template>
+
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="id">รหัสนักศึกษา <p-sortIcon field="id"></p-sortIcon></th>
                 <th pSortableColumn="name">ชื่อ-สกุล <p-sortIcon field="name"></p-sortIcon></th>
                 <th>รูปภาพ</th>
-                <th>ปริญญา</th>
-                <th>เกียรตินิยม</th>
+                <th>ผลตรวจ</th>
+                <th>สถานะสิทธิ์</th>
+                <th>ปริญญา / เกียรตินิยม</th>
+                <th>ซ้อมย่อยรวม</th>
+                <th>ซ้อมใหญ่</th>
                 <th>แถวที่</th>
                 <th>ลำดับที่</th>
             </tr>
         </ng-template>
+
         <ng-template pTemplate="body" let-std>
             <tr>
-                <td>{{std.id}}</td>
-                <td>{{std.name}}</td>
-                <td><img src="assets/images/example-std.png" [alt]="std.name" width="100" class="shadow-4" /></td>
-                <td>ตรี</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
+                <td>
+                    <span class="p-column-title">รหัสนักศึกษา</span>
+                    {{std.id}}
+                </td>
+                <td>
+                    <span class="p-column-title">ชื่อ-สกุล</span>
+                    {{std.name}}
+                </td>
+                <td>
+                    <span class="p-column-title">รูปภาพ</span>
+                    <img src="assets/images/example-std.png" [alt]="std.name" width="100" class="shadow-4" />
+                </td>
+                <td>
+                    <span class="p-column-title">ผลตรวจ</span>
+                    <span class="text-green-500">ตรวจแล้ว</span>
+                </td>
+                <td>
+                    <span class="p-column-title">สถานะสิทธิ์</span>
+                    <span class="text-green-500">ผ่าน</span>
+                </td>
+                <td>
+                    <span class="p-column-title">ปริญญา / เกียรตินิยม</span>
+                    ตรี
+                </td>
+                <td>
+                    <span class="p-column-title">ซ้อมย่อยรวม</span>
+                    <span class="text-green-500"><i class="pi pi-check-circle"></i></span>
+                </td>
+                <td>
+                    <span class="p-column-title">ซ้อมใหญ่</span>
+                    <span class="text-red-500"><i class="pi pi-times-circle"></i></span>
+                </td>
+                <td>
+                    <span class="p-column-title">แถวที่</span>
+                    50
+                </td>
+                <td>
+                    <span class="p-column-title">ลำดับที่</span>
+                    420
+                </td>
             </tr>
         </ng-template>
+
         <ng-template pTemplate="summary">
             <div class="flex align-items-center justify-content-between">
-                In total there are {{stdList ? stdList.length : 0 }} products.
+                มีบัณฑิตทั้งหมด {{stdList ? stdList.length : 0 }} คน
             </div>
         </ng-template>
+        
     </p-table>
 </div>

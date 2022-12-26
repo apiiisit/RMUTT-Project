@@ -13,6 +13,8 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TableModule } from 'primeng/table';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ImageModule } from 'primeng/image';
 
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
@@ -56,7 +58,9 @@ import { MenuComponent } from './shared/menu/menu.component';
     MessagesModule,
     MessageModule,
     ScrollPanelModule,
-    TableModule
+    TableModule,
+    ToolbarModule,
+    ImageModule
   ],
   providers: [{
     provide: LocationStrategy,

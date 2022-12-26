@@ -1,1 +1,86 @@
-<p>manage-std works!</p>
+<div class="card">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="เพิ่ม" icon="pi pi-plus" class="p-button-success mr-2"></button>
+            <button pButton pRipple icon="pi pi-trash" class="p-button-danger" [disabled]="!selectedStd || !selectedStd.length"></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="Import" icon="pi pi-plus"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="stdList" responsiveLayout="stack" [rows]="10" [paginator]="true"
+        [globalFilterFields]="['id', 'name']" [(selection)]="selectedStd" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="แสดง {first} ถึง {last} จากทั้งหมด {totalRecords} รายการ"
+        [showCurrentPageReport]="true">
+
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="searchStd(dt, $event)" placeholder="ค้นหา..." />
+                </span>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="id">รหัสนักศึกษา <p-sortIcon field="id"></p-sortIcon></th>
+                <th pSortableColumn="name">ชื่อ-สกุล <p-sortIcon field="name"></p-sortIcon></th>
+                <th>ผลตรวจ</th>
+                <th>สถานะบัตร</th>
+                <th>แถวที่</th>
+                <th>ลำดับที่</th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-std>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="std"></p-tableCheckbox>
+                </td>
+                <td>
+                    <span class="p-column-title">รหัสนักศึกษา</span>
+                    {{std.id}}
+                </td>
+                <td>
+                    <span class="p-column-title">ชื่อ-สกุล</span>
+                    {{std.name}}
+                </td>
+                <td>
+                    <span class="p-column-title">ผลตรวจ</span>
+                    <!-- <img src="assets/images/atk.jpg" [alt]="std.name" width="50" class="shadow-4" /> -->
+                    <p-image src="assets/images/atk.jpg" alt="atk" width="50" [preview]="true"></p-image>
+                </td>
+                <td>
+                    <span class="p-column-title">สถานะบัตร</span>
+                    <img src="assets/images/rfid-red.png" alt="rfid" width="50" />
+                </td>
+                <td>
+                    <span class="p-column-title">แถวที่</span>
+                    50
+                </td>
+                <td>
+                    <span class="p-column-title">ลำดับที่</span>
+                    420
+                </td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"></button>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                มีบัณฑิตทั้งหมด {{stdList ? stdList.length : 0 }} คน
+            </div>
+        </ng-template>
+        
+    </p-table>
+</div>

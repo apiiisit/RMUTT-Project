@@ -32,6 +32,12 @@
     cursor: pointer;
 }
 
+.logout {
+    position: fixed;
+    bottom: 0;
+    width: 230px;
+}
+
 @media screen and (max-width: 1000px) {
     .layout {
         display: none;
