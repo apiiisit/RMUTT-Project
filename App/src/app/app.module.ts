@@ -15,6 +15,7 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ImageModule } from 'primeng/image';
+import { DialogModule } from 'primeng/dialog';
 
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
@@ -60,7 +61,8 @@ import { MenuComponent } from './shared/menu/menu.component';
     ScrollPanelModule,
     TableModule,
     ToolbarModule,
-    ImageModule
+    ImageModule,
+    DialogModule
   ],
   providers: [{
     provide: LocationStrategy,

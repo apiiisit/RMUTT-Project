@@ -2,11 +2,15 @@
     <p-toolbar styleClass="mb-4 gap-2">
         <ng-template pTemplate="left">
             <button pButton pRipple label="เพิ่ม" icon="pi pi-plus" class="p-button-success mr-2"></button>
-            <button pButton pRipple icon="pi pi-trash" class="p-button-danger" [disabled]="!selectedStd || !selectedStd.length"></button>
+            <button pButton pRipple icon="pi pi-trash" class="p-button-danger"
+                [disabled]="!selectedStd || !selectedStd.length"></button>
         </ng-template>
 
         <ng-template pTemplate="right">
-            <button pButton pRipple label="Import" icon="pi pi-plus"></button>
+            <input #fileUpload type="file" (click)="fileUpload.value = null!" style="display:none"
+                (change)="readFile($event)"
+                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+            <button pButton pRipple label="Import" icon="pi pi-file-import" (click)="fileUpload.click()"></button>
         </ng-template>
     </p-toolbar>
 
@@ -54,7 +58,6 @@
                 </td>
                 <td>
                     <span class="p-column-title">ผลตรวจ</span>
-                    <!-- <img src="assets/images/atk.jpg" [alt]="std.name" width="50" class="shadow-4" /> -->
                     <p-image src="assets/images/atk.jpg" alt="atk" width="50" [preview]="true"></p-image>
                 </td>
                 <td>
@@ -71,7 +74,7 @@
                 </td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"></button>
                 </td>
             </tr>
         </ng-template>
@@ -81,6 +84,45 @@
                 มีบัณฑิตทั้งหมด {{stdList ? stdList.length : 0 }} คน
             </div>
         </ng-template>
-        
+
     </p-table>
 </div>
+
+<p-dialog [(visible)]="readStdDialog" header="รายละเอียดข้อมูลบัณฑิต" [modal]="true" [breakpoints]="{'960px': '75vw'}"
+    [style]="{width: '60vw'}" [draggable]="false" [resizable]="false">
+
+    <p-table [value]="readStd" responsiveLayout="stack" [paginator]="true" [rows]="5" [rowHover]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>รหัสนักศึกษา</th>
+                <th>ชื่อ-สกุล</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-std>
+            <tr>
+                <td>
+                    <span class="p-column-title">รหัสนักศึกษา</span>
+                    {{std['รหัสนักศึกษา']}}
+                </td>
+                <td>
+                    <span class="p-column-title">ชื่อ-สกุล</span>
+                    {{std['ชื่อ-นามสกุล']}}
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                มีบัณฑิตทั้งหมด {{readStd ? readStd.length : 0 }} คน
+            </div>
+            
+        </ng-template>
+
+    </p-table>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-upload" label="Import" (click)="importFile()"></p-button>
+    </ng-template>
+
+</p-dialog>

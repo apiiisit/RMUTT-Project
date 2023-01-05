@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertService } from '../../services/alert.service';
 import { AuthService } from '../../services/auth.service';
-import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,8 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -33,21 +34,9 @@ export class LoginComponent {
     }
     this.authService.login(form).subscribe((res: any) => {
       if (res.error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'เข้าสู่ระบบไม่สำเร็จ',
-          showConfirmButton: false,
-          timer: 1500
-        }).then(() => this.msg = res.error);
+        this.alertService.sweetalert('error', 'เข้าสู่ระบบไม่สำเร็จ').then(() => this.msg = res.error);
       } else {
-        Swal.fire({
-          icon: 'success',
-          title: 'เข้าสู่ระบบสำเร็จ',
-          showConfirmButton: false,
-          timer: 1500
-        }).then(() => {
-          this.router.navigate(['admin'])
-        })
+        this.alertService.sweetalert('success', 'เข้าสู่ระบบสำเร็จ').then(() => this.router.navigate(['admin']));
       }
 
     })

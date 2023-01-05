@@ -23,4 +23,10 @@ export class StdService {
       headers: this.header
     })
   }
+
+  addStd(std: string[][]) {
+    return this.http.post(`${this.api}/admin/students/add`, std, {
+      headers: this.header
+    })
+  }
 }
