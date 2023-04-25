@@ -1,0 +1,22 @@
+<div class="m-2">
+    <p-fieldset legend="ซ้อมรับปริญญาบัตร">
+
+        <p-panel header="รอบ {{eventName}}" styleClass="mb-3">
+
+            <ng-template pTemplate="icons">
+                <button pButton class="p-panel-header-icon p-link" (click)="menu.toggle($event)">
+                    <span class="pi pi-cog"></span>
+                </button>
+                <p-menu #menu [model]="menuItem" [popup]="true" appendTo="body"></p-menu>
+            </ng-template>
+            <p-tree [value]="pointMenu" selectionMode="single" (onNodeSelect)="nodeSelect($event)"></p-tree>
+
+        </p-panel>
+
+    </p-fieldset>
+</div>
+
+<app-event-dialog />
+<app-event-edit-dialog />
+<app-point-dialog [eventId]="+eventId" />
+<app-point-edit-dialog />

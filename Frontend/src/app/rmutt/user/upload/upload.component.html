@@ -1,0 +1,40 @@
+<div class="m-5">
+
+    <p-fieldset legend="อัปโหลดรูปภาพ">
+
+        <div class="flex flex-wrap gap-3 mb-2">
+
+            <div class="flex">
+                <p-card header="รูปภาพบัณฑิต" [subheader]="user.msgStatus" [styleClass]="user.statusColor">
+                    <div class="flex flex-column align-items-center">
+                        <p-image *ngIf="photo" [src]="photo" alt="รูปภาพบัณฑิต" height="150" [preview]="true"></p-image>
+
+                        <!-- <p-fileUpload mode="basic" name="photo" url="api/user/uploadphoto" [headers]="httpHeaders" -->
+                        <p-fileUpload *ngIf="user?.statusColor != 'green'" mode="basic" name="photo" url="api/user/uploadphoto" [headers]="httpHeaders" 
+                            accept="image/*" chooseLabel="เลือกรูปภาพ" uploadLabel="อัปโหลด"
+                            (onSelect)="onSelect($event, 'photo')" (onUpload)="onUpload()" (onError)="onError()">
+                        </p-fileUpload>
+                    </div>
+                </p-card>
+            </div>
+
+            <div *ngFor="let task of uploadTaskList" class="flex">
+                <p-card [header]="task.name" [subheader]="task.files[0].msgStatus" [styleClass]="task.files[0].statusColor">
+                    <div class="flex flex-column align-items-center">
+                        <p-image *ngIf="task.files[0].path" [src]="task.files[0].path" [alt]="task.name" height="150" [preview]="true"></p-image>
+
+                        <!-- <p-fileUpload mode="basic" name="file" url="api/user/uploadfile/{{task.id}}" [headers]="httpHeaders" -->
+                        <p-fileUpload *ngIf="task.files[0].statusColor != 'green'" mode="basic" name="file" url="api/user/uploadfile/{{task.id}}" [headers]="httpHeaders"
+                            accept="image/*" chooseLabel="เลือกรูปภาพ" uploadLabel="อัปโหลด"
+                            (onSelect)="onSelect($event, 'file', task)" (onUpload)="onUpload()" (onError)="onError()">
+                        </p-fileUpload>
+                    </div>
+                </p-card>
+            </div>
+
+        </div>
+
+        <span class="text-red-500"><span class="font-bold">**หมายเหตุ</span> กรุณาอัปโหลดไฟล์รูปภาพ แนะนำประเภท .jpg .png</span>
+    
+    </p-fieldset>
+</div>

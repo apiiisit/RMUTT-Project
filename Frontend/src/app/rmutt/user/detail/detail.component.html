@@ -1,0 +1,17 @@
+<div class="m-2 w-full">
+    <p-fieldset legend="รายละเอียด" styleClass="p-0">
+        <div class="flex flex-column align-items-center">
+            <h3>พิธีการเข้ารับพระราชทานปริญญาบัตร</h3>
+            <p>มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี</p>
+            <p>{{title}}</p>
+            <img src="api/image/{{std.photo}}" alt="รูปบัณฑิต" height="150" (error)="imageService.defaultImage($event)">
+            <p>รับปริญญา{{subtitle}}</p>
+            <p>ชื่อ-สกุล {{std.prefixname}} {{std.name}} <span *ngIf="std.award" class="font-bold">(เหรียญ{{std.award}})</span></p>
+            <p>รหัสนักศึกษา {{std.id}}</p>
+            <p>สาขา {{std.faculty}}</p>
+            <p>{{std.degree}}</p>
+            <p *ngIf="std.honor">เกียรตินิยมอันดับ {{std.honor}}</p>
+            <p>ลำดับรอบ {{std.row}} ลำดับในคณะ {{std.rowfaculty}}</p>
+        </div>
+    </p-fieldset>
+</div>

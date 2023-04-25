@@ -1,0 +1,28 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Node 
+node_modules/
+.env
+
+# npm lockfile is not needed
+package-lock.json
+
+# Example Dataset
+data.csv
+
+# DB
+/prisma/db/
+/prisma/migrations/
+config.json
+
+# image file
+upload/

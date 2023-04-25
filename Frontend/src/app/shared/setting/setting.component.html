@@ -1,0 +1,20 @@
+<div class="m-2">
+    <p-fieldset legend="การตั้งค่า">
+
+        <form [formGroup]="formService.settingForm">
+
+            <div class="flex flex-column field col-5">
+                <label for="id">รับปริญญาบัตรครั้งที่ ปีการศึกษา<span class="text-red-500">*</span></label>
+                <input type="text" pInputText id="id" formControlName="title" />
+            </div>
+
+            <div class="flex flex-column field col-5">
+                <label for="id">วันที่รับ (รอบ)<span class="text-red-500">*</span></label>
+                <input type="text" pInputText id="id" formControlName="subtitle" />
+            </div>
+
+            <p-button icon="pi pi-save" label="บันทึก" (click)="editSetting()"></p-button>
+        </form>
+
+    </p-fieldset>
+</div>

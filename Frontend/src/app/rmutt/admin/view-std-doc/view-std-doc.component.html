@@ -1,0 +1,67 @@
+<div class="m-2 w-full">
+
+    <div class="m-3">
+        <span class="cursor-pointer hover:text-blue-500" routerLink="/admin/manage/document"><i class="pi pi-arrow-left"></i> กลับไปหน้าจัดการเอกสาร</span>
+    </div>
+
+    <p-fieldset legend="เอกสาร {{docName}} รายชื่อบัณฑิต">
+        <p-table #dt [value]="stdList" responsiveLayout="stack" [rows]="10" [paginator]="true"
+            [globalFilterFields]="['id', 'name', 'faculty']" [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="แสดง {first} ถึง {last} จากทั้งหมด {totalRecords} รายการ"
+            [showCurrentPageReport]="true">
+
+            <ng-template pTemplate="caption">
+                <div class="flex align-items-center justify-content-between">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="searchStd(dt, $event)"
+                            placeholder="ค้นหา... ชื่อ รหัสนักศึกษา สาขา" />
+                    </span>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="rowfaculty">ลำดับ <p-sortIcon field="rowfaculty" /></th>
+                    <th pSortableColumn="name">ชื่อ-สกุล <p-sortIcon field="name" /></th>
+                    <th pSortableColumn="faculty">สาขา <p-sortIcon field="faculty" /></th>
+                    <th>เอกสาร</th>
+                    <th pSortableColumn="msgComment">สถานะ <p-sortIcon field="msgComment" /></th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-std>
+                <tr>
+                    <td>
+                        <span class="p-column-title">ลำดับ</span>
+                        <span>{{std.rowfaculty}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">ชื่อ-สกุล</span>
+                        <span>{{std.prefixname}} {{std.name}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">สาขา</span>
+                        <span>{{std.faculty}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">เอกสาร</span>
+                        <p-image src="api/image/{{std.files[0]?.path}}" [alt]="docName" width="50" [preview]="true"
+                            (onImageError)="imageService.defaultImage($event, 'atk')"></p-image>
+                    </td>
+                    <td>
+                        <span class="p-column-title">สถานะ</span>
+                        <span class="font-bold text-{{std.colorStatus}}-500">{{std.msgComment}}</span>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="summary">
+                <div class="flex align-items-center justify-content-between">
+                    มีบัณฑิตทั้งหมด {{stdList ? stdList.length : 0 }} คน
+                </div>
+            </ng-template>
+
+        </p-table>
+    </p-fieldset>
+</div>

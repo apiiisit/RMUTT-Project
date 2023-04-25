@@ -1,0 +1,15 @@
+{
+    "asar": true,
+    "directories": {
+        "output": "release/"
+    },
+    "win": {
+        "icon": "app/assets/rfid.png",
+        "target": [
+            "portable"
+        ]
+    },
+    "portable": {
+        "splashImage": "app/assets/splash.bmp"
+    }
+}

@@ -1,0 +1,12 @@
+<app-navbar />
+
+<div class="grid" style="margin: 0;">
+    <div id="menu" class="col-fixed menu" style="width:230px; padding: 0;">
+        <app-menu />
+    </div>
+    <div class="col" style="padding: 0;">
+        <p-scrollPanel [style]="{height: '90vh'}" styleClass="custombar">
+            <router-outlet />
+        </p-scrollPanel>
+    </div>
+</div>

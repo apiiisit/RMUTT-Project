@@ -1,0 +1,54 @@
+<p-message *ngIf="!deviceStatus" severity="warn" text="ไม่ได้เชื่อมต่อเครื่องอ่านบัตร"
+    styleClass="ml-2 w-full shadow-2"></p-message>
+<div class="m-2">
+    <p-fieldset legend="สแกนบัตร">
+
+        <div class="tool mb-2 flex align-items-center">
+            <label for="binary" class="mr-2">เฉพาะที่ยังไม่มี tag</label>
+            <p-checkbox class="mr-2" [(ngModel)]="checkedRFID" [binary]="true" inputId="binary"
+                (onChange)="searchMultiSelect()"></p-checkbox>
+
+            <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="name"
+                selectedItemsLabel="{0} สาขาที่เลือก" placeholder="เลือกสาขา" styleClass="mr-2"
+                [style]="{'width':'200px'}" (onChange)="searchMultiSelect()"></p-multiSelect>
+
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input type="text" pInputText placeholder="ค้นหา... ชื่อ รหัสนักศึกษา" [(ngModel)]="searchText"
+                    (input)="searchInput()" class="mr-2" />
+            </span>
+            <p-message *ngIf="showSearchNotFound" severity="error" text="ไม่มีบัณฑิตคนนี้ในระบบ"></p-message>
+
+            <p-button label="รีเซ็ต" styleClass="p-button-link" (click)="reset()"></p-button>
+
+        </div>
+
+        <ng-template #stdNull>ยังไม่มีข้อมูลบัณฑิตในขณะนี้...</ng-template>
+
+        <div *ngIf="stdList.length > 0; else stdNull">
+
+            <div class="flex flex-column align-items-center">
+                <div class="flex align-items-center gap-3">
+                    <img src="api/image/{{stdList[indexStd].photo}}" alt="รูปบัณฑิต" height="200"
+                        (error)="imageService.defaultImage($event)">
+                    <img src="assets/images/chain.png" alt="การเชื่อมต่อ" height="20">
+                    <img src="assets/images/rfid-{{stdList[indexStd].tag ? 'green' : 'red'}}.png"
+                        alt="สถานะการเชื่อมต่อ" height="150">
+                    <span *ngIf="stdList[indexStd].tag" class="text-red-500 cursor-pointer" (click)="deleteTag()">ลบ
+                        RFID Tag</span>
+                </div>
+
+                <p>ชื่อ-สกุล {{stdList[indexStd].name}} รหัสนักศึกษา {{stdList[indexStd].id}}</p>
+                <p>สาขา {{stdList[indexStd].faculty}}</p>
+                <p>{{stdList[indexStd].degree}}</p>
+            </div>
+
+            <div class="flex flex-column justify-content-center align-items-center">
+                <p-paginator [first]="indexStd" [rows]="1" [totalRecords]="totalRecords"
+                    (onPageChange)="onPageChange($event)"></p-paginator>
+                <p>คนที่ {{indexStd+1}}/{{totalRecords}}</p>
+            </div>
+        </div>
+
+    </p-fieldset>
+</div>

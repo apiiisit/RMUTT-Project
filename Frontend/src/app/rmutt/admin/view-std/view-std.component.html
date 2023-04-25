@@ -1,0 +1,155 @@
+<div class="m-2 w-full">
+    <p-fieldset legend="รายชื่อบัณฑิต">
+        <p-table #dt [value]="stdList" responsiveLayout="stack" [rows]="10" [paginator]="true"
+            [globalFilterFields]="['id', 'name']" [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="แสดง {first} ถึง {last} จากทั้งหมด {totalRecords} รายการ"
+            [showCurrentPageReport]="true">
+
+            <ng-template pTemplate="caption">
+                <div class="flex align-items-center justify-content-between">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="searchStd(dt, $event)"
+                            placeholder="ค้นหา... ชื่อ รหัสนักศึกษา" />
+                    </span>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="rowfaculty">ลำดับ <p-sortIcon field="rowfaculty" /></th>
+                    <th pSortableColumn="degree">ปริญญา <p-sortIcon field="degree" /></th>
+                    <th pSortableColumn="id">รหัสนักศึกษา <p-sortIcon field="id" /></th>
+                    <th pSortableColumn="name">ชื่อ-สกุล <p-sortIcon field="name" /></th>
+                    <th pSortableColumn="faculty">สาขา <p-sortIcon field="faculty" /></th>
+                    <th>รูปภาพ</th>
+                    <th>เอกสาร</th>
+                    <!-- <th pSortableColumn="msgComment">ผลตรวจเอกสาร <p-sortIcon field="msgComment" /></th> -->
+                    <!-- <th pSortableColumn="passed">สถานะสิทธิ์ <p-sortIcon field="passed" /></th> -->
+                    <th>ประวัติซ้อม</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-std>
+                <tr>
+                    <td>
+                        <span class="p-column-title">ลำดับ</span>
+                        <span>{{std.rowfaculty}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">ปริญญา</span>
+                        <span>{{std.degree}} {{std.honor}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">รหัสนักศึกษา</span>
+                        <span>{{std.id}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">ชื่อ-สกุล</span>
+                        <span>
+                            {{std.prefixname}} {{std.name}}
+                            <span *ngIf="std.award" class="font-bold">
+                                (เหรียญ{{std.award}})
+                            </span>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">สาขา</span>
+                        <span>{{std.faculty}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">รูปภาพ</span>
+                        <p-image src="api/image/{{std.photo}}" [alt]="std.name" width="50" [preview]="true"
+                            (onImageError)="imageService.defaultImage($event)"></p-image>
+                    </td>
+                    <td>
+                        <span class="p-column-title">เอกสาร</span>
+                        <button pButton pRipple type="button" icon="pi pi-file" class="p-button-rounded p-button-help" (click)="viewDoc(std.id)"></button>
+                    </td>
+                    <!-- <td>
+                        <span class="p-column-title">ผลตรวจเอกสาร</span>
+                        <span class="text-{{std.colorStatus}}-500">{{std.msgComment}}</span>
+                    </td> -->
+                    <!-- <td>
+                        <span class="p-column-title">สถานะสิทธิ์</span>
+                        <span class="text-{{std.passed ? 'green' : 'red'}}-500">{{std.passed ? 'ผ่าน' :
+                            'ไม่ผ่าน'}}</span>
+                    </td> -->
+                    <td>
+                        <span class="p-column-title">ประวัติซ้อม</span>
+                        <button pButton pRipple type="button" icon="pi pi-search" class="p-button-rounded" (click)="viewHistory(std.id)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="summary">
+                <div class="flex align-items-center justify-content-between">
+                    มีบัณฑิตทั้งหมด {{stdList ? stdList.length : 0 }} คน
+                </div>
+            </ng-template>
+
+        </p-table>
+    </p-fieldset>
+</div>
+
+<p-dialog [(visible)]="dialogHistory" header="ประวัติการเข้าซ้อม" [modal]="true" [breakpoints]="{'960px': '75vw'}"
+    [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+
+    <ng-template pTemplate="content">
+
+        <p-table [value]="history" [rowHover]="true">
+    
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>รายการซ้อม</th>
+                    <th>สถานะ</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-event>
+                <tr>
+                    <td>
+                        <span>{{event.name}}</span>
+                    </td>
+                    <td>
+                        <span class="font-bold text-{{['green', 'yellow', 'red'][event.passed]}}-500">{{event.passed | scanStatus}}</span>
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+
+    </ng-template>
+
+</p-dialog>
+
+<p-dialog [(visible)]="dialogDoc" header="การอัปโหลดเอกสาร" [modal]="true" [breakpoints]="{'960px': '75vw'}"
+    [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+
+    <ng-template pTemplate="content">
+
+        <p-table [value]="stdDoc.files" [rowHover]="true">
+    
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>รายการอัปโหลด</th>
+                    <th>สถานะ</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-doc>
+                <tr>
+                    <td>
+                        <span>{{doc.name}}</span>
+                    </td>
+                    <td>
+                        <span class="font-bold text-{{doc.colorStatus}}-500">{{doc.msgComment}}</span>
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+
+    </ng-template>
+
+</p-dialog>

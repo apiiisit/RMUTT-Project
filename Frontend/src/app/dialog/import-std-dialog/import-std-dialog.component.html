@@ -1,0 +1,64 @@
+<p-dialog [(visible)]="dialogService.importDialog" header="รายละเอียดข้อมูลบัณฑิต" [modal]="true"
+    [breakpoints]="{'960px': '75vw'}" [style]="{width: '80vw'}" [draggable]="false" [resizable]="false">
+
+    <ng-template pTemplate="content">
+
+        <p-table [value]="readStd" responsiveLayout="stack" [paginator]="true" [rows]="5" [rowHover]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>ลำดับรอบ/คณะ</th>
+                    <th>ปริญญา</th>
+                    <th>รหัสนักศึกษา</th>
+                    <th>ชื่อ-สกุล</th>
+                    <th>สาขา</th>
+                    <th>ปี/ภาค</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-std>
+                <tr>
+                    <td>
+                        <span class="p-column-title">ลำดับรอบ/คณะ</span>
+                        {{std['ลำดับรอบ']}}/{{std['ลำดับในคณะ']}}
+                    </td>
+                    <td>
+                        <span class="p-column-title">ปริญญา</span>
+                        {{std['ชั้นปริญญา']}} {{std['อันดับเกียรตินิยม']}}
+                    </td>
+                    <td>
+                        <span class="p-column-title">รหัสนักศึกษา</span>
+                        {{std['รหัสนักศึกษา']}}
+                    </td>
+                    <td>
+                        <span class="p-column-title">ชื่อ-สกุล</span>
+                        {{std['คำนำหน้า']}} {{std['ชื่อ-สกุล']}} <span *ngIf="std['เหรียญ']"
+                            class="font-bold">(เหรียญ{{std['เหรียญ']}})</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">สาขา</span>
+                        {{std['สาขา']}}
+                    </td>
+                    <td>
+                        <span class="p-column-title">ปี/ภาค</span>
+                        {{std['ปี']}}/{{std['ภาค']}}
+                    </td>
+
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="summary">
+                <div class="flex align-items-center justify-content-between">
+                    มีบัณฑิตทั้งหมด {{readStd ? readStd.length : 0 }} คน
+                </div>
+
+            </ng-template>
+
+        </p-table>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-upload" label="Import" (click)="importFile()"></p-button>
+    </ng-template>
+
+</p-dialog>

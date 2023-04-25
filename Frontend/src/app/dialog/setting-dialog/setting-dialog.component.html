@@ -1,0 +1,26 @@
+<p-dialog [(visible)]="dialogService.settingDialog" header="การตั้งค่า" [modal]="true" [breakpoints]="{'960px': '75vw'}"
+    [style]="{width: '40vw'}" [draggable]="false" [resizable]="false">
+
+    <ng-template pTemplate="content">
+    
+        <form [formGroup]="formService.settingForm">
+
+            <div class="flex flex-column field">
+                <label for="id">ครั้งที่ ปีการศึกษา<span class="text-red-500">*</span></label>
+                <input type="text" pInputText id="id" formControlName="title" />
+            </div>
+
+            <div class="flex flex-column field">
+                <label for="id">วันที่รับ (รอบ)<span class="text-red-500">*</span></label>
+                <input type="text" pInputText id="id" formControlName="subtitle" />
+            </div>
+
+        </form>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-save" label="บันทึก" (click)="editSetting()"></p-button>
+    </ng-template>
+
+</p-dialog>

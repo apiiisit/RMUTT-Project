@@ -1,0 +1,19 @@
+<p-dialog [(visible)]="dialogService.pointDialog" header="จุดสแกน" [modal]="true" [breakpoints]="{'960px': '75vw'}"
+    [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+
+    <ng-template pTemplate="content">
+
+        <div class="field">
+            <label for="name">ชื่อจุดสแกน<span class="text-red-500">*</span></label>
+            <input id="name" type="text" class="w-full" pInputText [(ngModel)]="pointName" />
+            <small *ngIf="submited && !pointName" class="text-red-500">กรุณากรอกชื่อจุดสแกน</small>
+        </div>
+        <small class="text-red-500">* ตัวอย่าง จุด 1</small>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-plus" label="เพิ่มจุดสแกน" (click)="submit()"></p-button>
+    </ng-template>
+
+</p-dialog>

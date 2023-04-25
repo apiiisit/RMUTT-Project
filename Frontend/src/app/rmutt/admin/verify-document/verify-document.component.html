@@ -1,0 +1,82 @@
+<div class="m-2">
+
+    <div class="m-3">
+        <span class="cursor-pointer hover:text-blue-500" routerLink="/admin/manage/document"><i class="pi pi-arrow-left"></i> กลับไปหน้าจัดการเอกสาร</span>
+    </div>
+
+    <p-fieldset legend="ตรวจสอบเอกสาร {{docName}}">
+
+        <ng-template #stdNull>ยังไม่มีเอกสารให้ตรวจสอบในขณะนี้...</ng-template>
+
+        <div *ngIf="mode === 'photo'">
+            <div *ngIf="photoList.length > 0; else stdNull">
+
+                <div class="flex justify-content-center">
+                    <div class="flex flex-column ">
+                        <div>
+                            <span class="font-bold">ชื่อ-สกุล</span>
+                            {{photoList[0].prefixname}}{{photoList[0].name}}
+                        </div>
+                        <div>
+                            <span class="font-bold">รหัสนักศึกษา</span> {{photoList[0].id}}
+                        </div>
+                        <div>
+                            <span class="font-bold">สาขา</span> {{photoList[0].faculty}}
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="flex justify-content-center mt-3">
+                    <div>
+                        <p-image src="api/image/{{photoList[0].photo}}" alt="รูป ATK" height="200" [preview]="true"
+                            (onImageError)="imageService.defaultImage($event, 'atk')"></p-image>
+                    </div>
+                </div>
+    
+                <div class="flex justify-content-center mt-3">
+                    <p-button label="ไม่ผ่าน" icon="pi pi-times" styleClass="p-button-sm p-button-danger mr-2" (click)="notPass(photoList[0])"></p-button>
+                    <p-button label="ผ่าน" icon="pi pi-check" styleClass="p-button-sm p-button-success" (click)="pass(photoList[0])"></p-button>
+                </div>
+    
+            </div>
+        </div>
+
+        <div *ngIf="mode === 'file' || mode === 'allfile'">
+            <div *ngIf="stdList.length > 0; else stdNull">
+
+                <div class="flex justify-content-center">
+                    <div class="flex flex-column ">
+                        <div>
+                            <span class="font-bold">ชื่อ-สกุล</span>
+                            {{stdList[0].students.prefixname}}{{stdList[0].students.name}}
+                        </div>
+                        <div>
+                            <span class="font-bold">รหัสนักศึกษา</span> {{stdList[0].students.id}}
+                        </div>
+                        <div>
+                            <span class="font-bold">สาขา</span> {{stdList[0].students.faculty}}
+                        </div>
+                        <div *ngIf="mode === 'allfile'">
+                            <span class="font-bold">ประเภทเอกสาร</span> {{stdList[0].documents.name}}
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="flex justify-content-center mt-3">
+                    <div>
+                        <p-image src="api/image/{{stdList[0].path}}" alt="รูป ATK" height="200" [preview]="true"
+                            (onImageError)="imageService.defaultImage($event, 'atk')"></p-image>
+                    </div>
+                </div>
+    
+                <div class="flex justify-content-center mt-3">
+                    <p-button label="ไม่ผ่าน" icon="pi pi-times" styleClass="p-button-sm p-button-danger mr-2" (click)="notPass(stdList[0])"></p-button>
+                    <p-button label="ผ่าน" icon="pi pi-check" styleClass="p-button-sm p-button-success" (click)="pass(stdList[0])"></p-button>
+                </div>
+    
+            </div>
+        </div>
+        
+
+    </p-fieldset>
+</div>

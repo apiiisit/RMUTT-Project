@@ -1,0 +1,85 @@
+<div class="m-2">
+
+    <div class="m-3">
+        <span class="cursor-pointer hover:text-blue-500" routerLink="/admin/graduation-rehearsal/{{eventId}}" [state]="{eventName}"><i class="pi pi-arrow-left"></i> กลับไปหน้า{{eventName}}</span>
+    </div>
+
+    <p-fieldset legend="{{eventName}} ประวัติการสแกน {{pointName}}">
+        <p-table #dt [value]="historyList" responsiveLayout="stack" [rows]="10" [paginator]="true"
+            [globalFilterFields]="['id', 'name', 'faculty']" [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="แสดง {first} ถึง {last} จากทั้งหมด {totalRecords} รายการ"
+            [showCurrentPageReport]="true">
+
+            <ng-template pTemplate="caption">
+                <div class="flex align-items-center justify-content-between">
+
+                    <div class="flex gap-4">
+                        <div class="field-radiobutton">
+                            <p-radioButton name="selectRadio" value="all" [(ngModel)]="selectRadio" (click)="toggleSelect()"></p-radioButton>
+                            <label>แสดงทั้งหมด</label>
+                        </div>
+                        <div class="field-radiobutton">
+                            <p-radioButton name="selectRadio" value="in" [(ngModel)]="selectRadio" (click)="toggleSelect()"></p-radioButton>
+                            <label>เฉพาะคนเข้าซ้อม</label>
+                        </div>
+                        <div class="field-radiobutton">
+                            <p-radioButton name="selectRadio" value="out" [(ngModel)]="selectRadio" (click)="toggleSelect()"></p-radioButton>
+                            <label>เฉพาะคนไม่เข้าซ้อม</label>
+                        </div>
+
+                        <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-danger mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+
+                    </div>
+                    
+
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="searchStd(dt, $event)"
+                            placeholder="ค้นหา... ชื่อ,รหัส,สาขา" />
+                    </span>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="id">รหัสนักศึกษา <p-sortIcon field="id" /></th>
+                    <th pSortableColumn="name">ชื่อ-สกุล <p-sortIcon field="name" /></th>
+                    <th pSortableColumn="faculty">สาขา <p-sortIcon field="faculty" /></th>
+                    <th>เวลาสแกน</th>
+                    <!-- <th></th> -->
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-std>
+                <tr>
+                    <td>
+                        <span class="p-column-title">รหัสนักศึกษา</span>
+                        <span>{{std.id}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">ชื่อ-สกุล</span>
+                        <span>{{std.name}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">สาขา</span>
+                        <span>{{std.faculty}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">เวลาสแกน</span>
+                        <span>{{std.scans[0]?.scanedAt | dateThai}}</span>
+                    </td>
+                    <!-- <td>
+                        <p-button *ngIf="std.scanedAt" label="ลบประวัติ" icon="pi pi-trash" styleClass="p-button-sm p-button-danger" (click)="deleteEventScan(std.id)"></p-button>
+                    </td> -->
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="summary">
+                <div class="flex align-items-center justify-content-between">
+                    มีบัณฑิตทั้งหมด {{historyList ? historyList.length : 0 }} คน
+                </div>
+            </ng-template>
+
+        </p-table>
+    </p-fieldset>
+</div>

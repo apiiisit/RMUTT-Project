@@ -1,0 +1,49 @@
+<div *ngIf="role === 'user'" class="flex flex-column bg-blue-50 shadow-2 border-round" style="height: 90vh;">
+    <div class="cursor-pointer hover:bg-blue-100 {{activeMenu('user')}}" routerLink="/user" (click)="menuService.onClickMenu()">
+        <p class="ml-3">หน้าแรก</p>
+    </div>
+    <div class="cursor-pointer hover:bg-blue-100 {{activeMenu('check')}}" routerLink="check" (click)="menuService.onClickMenu()">
+        <p class="ml-3">ประวัติการเข้าซ้อม</p>
+    </div>
+    <div class="cursor-pointer hover:bg-blue-100 {{activeMenu('upload')}}" routerLink="upload" (click)="menuService.onClickMenu()">
+        <p class="ml-3">อัปโหลดเอกสาร</p>
+    </div>
+    <div class="absolute bottom-0 cursor-pointer hover:bg-blue-100" style="width: 230px;" (click)="logout()">
+        <p class="ml-3">ออกจากระบบ</p>
+    </div>
+</div>
+
+<div *ngIf="role === 'admin'" class="flex flex-column bg-blue-50 shadow-2 border-round" style="height: 90vh;">
+    <div class="cursor-pointer hover:bg-blue-100 {{activeMenu('admin')}}" routerLink="/admin" (click)="menuService.onClickMenu()">
+        <p class="ml-3">หน้าแรก</p>
+    </div>
+
+    <div class="cursor-pointer hover:bg-blue-100 {{activeMenu('graduation-rehearsal')}}" (click)="menu.toggle($event)">
+        <p class="ml-3">ระบบซ้อมรับปริญญา</p>
+    </div>
+    <p-menu #menu [popup]="true" [model]="items" styleClass="ml-8"></p-menu>
+    
+    <div class="cursor-pointer hover:bg-blue-100 {{activeMenu('check-rfid')}}" routerLink="check-rfid" (click)="menuService.onClickMenu()">
+        <p class="ml-3">ตรวจเช็คบัตร</p>
+    </div>
+    <div class="cursor-pointer hover:bg-blue-100 {{activeMenu('view')}}" routerLink="view" (click)="menuService.onClickMenu()">
+        <p class="ml-3">ดูรายชื่อบัณฑิต</p>
+    </div>
+    <div class="cursor-pointer hover:bg-blue-100 {{activeMenu('std')}}" routerLink="manage/std" (click)="menuService.onClickMenu()">
+        <p class="ml-3">จัดการข้อมูลบัณฑิต</p>
+    </div>
+    <div class="cursor-pointer hover:bg-blue-100 {{activeMenu('rfid')}}" routerLink="manage/rfid" (click)="menuService.onClickMenu()">
+        <p class="ml-3">จัดการบัตร RFiD</p>
+    </div>
+    <div class="cursor-pointer hover:bg-blue-100 {{activeMenu('document')}}" routerLink="manage/document" (click)="menuService.onClickMenu()">
+        <p class="ml-3">จัดการเอกสารบัณฑิต</p>
+    </div>
+    <div class="cursor-pointer hover:bg-blue-100 {{activeMenu('setting')}}" routerLink="setting" (click)="menuService.onClickMenu()">
+        <p class="ml-3">การตั้งค่า</p>
+    </div>
+    <div class="absolute bottom-0 cursor-pointer hover:bg-blue-100" style="width: 230px;" (click)="logout()">
+        <p class="ml-3">ออกจากระบบ</p>
+    </div>
+</div>
+
+<app-event-dialog />

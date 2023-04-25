@@ -1,0 +1,21 @@
+<p-dialog [(visible)]="dialogService.eventEditDialog" header="รอบซ้อมรับปริญญาบัตร" [modal]="true" [breakpoints]="{'960px': '75vw'}"
+    [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+
+    <ng-template pTemplate="content">
+
+        <form [formGroup]="formService.eventEditForm">
+
+            <div class="flex flex-column field">
+                <label for="name">ชื่อรอบรับปริญญา<span class="text-red-500">*</span></label>
+                <input type="text" pInputText id="name" formControlName="name" />
+            </div>
+
+        </form>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-save" label="บันทึก" (click)="editEvent()"></p-button>
+    </ng-template>
+
+</p-dialog>

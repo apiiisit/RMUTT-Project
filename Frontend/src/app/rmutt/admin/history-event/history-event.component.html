@@ -1,0 +1,112 @@
+<div class="m-2">
+
+    <div class="m-3">
+        <span class="cursor-pointer hover:text-blue-500" routerLink="/admin/graduation-rehearsal/{{eventid}}" [state]="{eventName}"><i class="pi pi-arrow-left"></i> กลับไปหน้า{{eventName}}</span>
+    </div>
+
+    <p-fieldset legend="ประวัติการสแกนทั้งหมด {{eventName}}">
+        <p-table #dt [value]="historyList" responsiveLayout="stack" [rows]="10" [paginator]="true"
+            [globalFilterFields]="['id', 'name', 'faculty']" [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="แสดง {first} ถึง {last} จากทั้งหมด {totalRecords} รายการ"
+            [showCurrentPageReport]="true">
+
+            <ng-template pTemplate="caption">
+                <div class="flex align-items-center justify-content-between">
+
+                    <div class="flex gap-4">
+                        <div class="field-radiobutton">
+                            <p-radioButton name="selectRadio" value="all" [(ngModel)]="selectRadio" (click)="toggleSelect()"></p-radioButton>
+                            <label>แสดงทั้งหมด</label>
+                        </div>
+                        <div class="field-radiobutton">
+                            <p-radioButton name="selectRadio" value="in" [(ngModel)]="selectRadio" (click)="toggleSelect()"></p-radioButton>
+                            <label>เข้าครบทุกจุด</label>
+                        </div>
+                        <div class="field-radiobutton">
+                            <p-radioButton name="selectRadio" value="out" [(ngModel)]="selectRadio" (click)="toggleSelect()"></p-radioButton>
+                            <label>เข้าไม่ครบทุกจุด</label>
+                        </div>
+
+                        <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-danger mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+
+                    </div>
+
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="searchStd(dt, $event)"
+                            placeholder="ค้นหา... ชื่อ,รหัส,สาขา" />
+                    </span>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 5rem"></th>
+                    <th pSortableColumn="id">รหัสนักศึกษา <p-sortIcon field="id" /></th>
+                    <th pSortableColumn="name">ชื่อ-สกุล <p-sortIcon field="name" /></th>
+                    <th pSortableColumn="faculty">สาขา <p-sortIcon field="faculty" /></th>
+                    <th pSortableColumn="passed">สถานะ <p-sortIcon field="passed" /></th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-std let-expanded="expanded">
+                <tr>
+                    <td>
+                        <button type="button" pButton pRipple [pRowToggler]="std" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                    </td>
+                    <td>
+                        <span class="p-column-title">รหัสนักศึกษา</span>
+                        <span>{{std.id}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">ชื่อ-สกุล</span>
+                        <span>{{std.name}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">สาขา</span>
+                        <span>{{std.faculty}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">สถานะ</span>
+                        <span class="font-bold text-{{['green', 'yellow', 'red'][std.passed]}}-500">{{std.passed | scanStatus}}</span>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="rowexpansion" let-std>
+                <tr>
+                    <td colspan="7">
+                        <div class="p-3">
+                            <p-table [value]="std.scans" dataKey="id">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>ชื่อจุด</th>
+                                        <th>เวลาสแกน</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-points>
+                                    <tr>
+                                        <td>{{points.name}}</td>
+                                        <td>{{points.scanedAt | dateThai}}</td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="6">There are no order for this product yet.</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="summary">
+                <div class="flex align-items-center justify-content-between">
+                    มีบัณฑิตทั้งหมด {{historyList ? historyList.length : 0 }} คน
+                </div>
+            </ng-template>
+
+        </p-table>
+    </p-fieldset>
+</div>

@@ -1,0 +1,73 @@
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model event {
+  eventid Int     @id @unique @default(autoincrement())
+  name    String
+  points  point[]
+}
+
+model point {
+  pointid  Int      @id @unique @default(autoincrement())
+  eventid  Int
+  event    event    @relation(fields: [eventid], references: [eventid], onDelete: Cascade)
+  name     String
+  scans    scan[]
+}
+
+model scan {
+  id        Int      @id @unique @default(autoincrement())
+  scanedAt  DateTime @default(now())
+  studentId String
+  students  students @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  pointid   Int
+  point     point    @relation(fields: [pointid], references: [pointid], onDelete: Cascade)
+
+  @@unique(fields: [studentId, pointid], name: "studentpoint")
+}
+
+model students {
+  id         String   @id @unique
+  prefixname String
+  name       String
+  row        Int
+  rowfaculty Int
+  faculty    String
+  degree     String
+  honor      Int?
+  award      String?
+  year       String
+  photo      String?  @unique
+  tag        String?  @unique
+  verify     Boolean  @default(false)
+  failreason String?
+  updatedAt  DateTime @updatedAt
+  scans      scan[]
+  files      files[]
+}
+
+model documents {
+  id    Int     @id @unique @default(autoincrement())
+  name  String
+  files files[]
+}
+
+model files {
+  id          Int       @id @unique @default(autoincrement())
+  documentsId Int
+  documents   documents @relation(fields: [documentsId], references: [id], onDelete: Cascade)
+  studentId   String
+  students    students  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  path        String    @unique
+  verify      Boolean   @default(false)
+  failreason  String?
+
+  @@unique(fields: [studentId, documentsId], name: "studentdoc")
+}

@@ -1,0 +1,70 @@
+<p-dialog [(visible)]="dialogService.stdDialog" header="รายละเอียดข้อมูลบัณฑิต" [modal]="true" [breakpoints]="{'960px': '75vw'}"
+    [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+
+    <ng-template pTemplate="content">
+
+        <p-message *ngIf="submitted && formService.stdForm.touched && this.formService.stdForm.invalid" styleClass="flex" severity="error" text="กรุณากรอกข้อมูลให้ถูกต้องครบถ้วน"></p-message>
+        
+        <form [formGroup]="formService.stdForm">
+
+            <div class="formgrid grid">
+                <div class="flex flex-column field col">
+                    <label for="row">ลำดับรอบ<span class="text-red-500">*</span></label>
+                    <input type="text" pInputText id="row" formControlName="row" />
+                </div>
+                <div class="flex flex-column field col">
+                    <label for="rowfaculty">ลำดับในคณะ<span class="text-red-500">*</span></label>
+                    <input type="text" pInputText id="rowfaculty" formControlName="rowfaculty" />
+                </div>
+            </div>
+    
+            <div class="formgrid grid">
+                <div class="flex flex-column field col">
+                    <label for="degree">ปริญญา<span class="text-red-500">*</span></label>
+                    <p-dropdown formControlName="degree" inputId="degree" [options]="degrees" placeholder="เลือก" [style]="{'width':'100%'}" appendTo="body" />
+                </div>
+                <div class="flex flex-column field col">
+                    <label for="honor">เกียรตินิยม</label>
+                    <input type="text" pInputText id="honor" formControlName="honor" />
+                </div>
+            </div>
+    
+            <div class="flex flex-column field">
+                <label for="id">รหัสนักศึกษา มีขีด<span class="text-red-500">*</span></label>
+                <input type="text" pInputText id="id" formControlName="id" />
+            </div>
+    
+            <div class="formgrid grid">
+                <div class="flex flex-column field col-3">
+                    <label for="prefixname">คำนำหน้า<span class="text-red-500">*</span></label>
+                    <p-dropdown formControlName="prefixname" inputId="prefixname" [options]="prefixnames" placeholder="เลือก" [style]="{'width':'100%'}" appendTo="body" />
+                </div>
+                <div class="flex flex-column field col">
+                    <label for="name">ชื่อ-สกุล<span class="text-red-500">*</span></label>
+                    <input type="text" pInputText id="name" formControlName="name" />
+                </div>
+                <div class="flex flex-column field col-3">
+                    <label for="award">เหรียญ</label>
+                    <p-dropdown formControlName="award" inputId="award" [options]="awards" placeholder="เลือก" [style]="{'width':'100%'}" [showClear]="true" appendTo="body" />
+                </div>
+            </div>
+    
+            <div class="formgrid grid">
+                <div class="flex flex-column field col">
+                    <label for="faculty">สาขา<span class="text-red-500">*</span></label>
+                    <p-dropdown formControlName="faculty" inputId="faculty" [options]="facultys" placeholder="เลือก" [style]="{'width':'100%'}" appendTo="body" />
+                </div>
+                <div class="flex flex-column field col">
+                    <label for="year">ปี/ภาค<span class="text-red-500">*</span></label>
+                    <input type="text" pInputText id="year" formControlName="year" />
+                </div>
+            </div>
+
+        </form>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="บันทึก" icon="pi pi-check" class="p-button-text" (click)="btnSave()"></button>
+    </ng-template>
+</p-dialog>

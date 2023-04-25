@@ -1,0 +1,22 @@
+<p-dialog [(visible)]="dialogService.docDialog" header="จัดการรายการเอกสาร" [modal]="true" [breakpoints]="{'960px': '75vw'}"
+    [style]="{width: '40vw'}" [draggable]="false" [resizable]="false">
+
+    <ng-template pTemplate="content">
+    
+        <form [formGroup]="formService.docForm">
+
+            <div class="flex flex-column field">
+                <label for="id">ชื่อรายการเอกสาร<span class="text-red-500">*</span></label>
+                <input type="text" pInputText id="id" formControlName="name" />
+                <small *ngIf="submited && !formService.docForm.get('name')?.value" class="text-red-500">กรุณากรอกรายการเอกสาร</small>
+            </div>
+
+        </form>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-save" label="บันทึก" (click)="submit()"></p-button>
+    </ng-template>
+
+</p-dialog>

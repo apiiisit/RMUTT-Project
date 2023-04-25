@@ -1,0 +1,10 @@
+<div class="m-2">
+    <p-fieldset legend="จัดการเอกสาร">
+
+        <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded mb-2" (click)="openDialog('new')"></button>
+        <p-tree [value]="docList" selectionMode="single" (onNodeSelect)="nodeSelect($event)"></p-tree>
+
+    </p-fieldset>
+</div>
+
+<app-doc-dialog [docid]="dialogDocId" />

@@ -1,0 +1,36 @@
+<p-message *ngIf="!deviceStatus" severity="warn" text="ไม่ได้เชื่อมต่อเครื่องอ่านบัตร" styleClass="ml-2 w-full shadow-2"></p-message>
+
+<div class="m-2">
+
+    <div class="m-3">
+        <span class="cursor-pointer hover:text-blue-500" routerLink="/admin/graduation-rehearsal/{{eventId}}" [state]="{eventName}"><i class="pi pi-arrow-left"></i> กลับไปหน้า{{eventName}}</span>
+    </div>
+    
+    <p-fieldset legend="{{eventName}} สแกน{{pointName}}" styleClass="relative">
+
+        <div class="absolute top-0 right-0 flex flex-column gap-2 align-items-center w-15rem h-20rem border-round">
+            <div *ngFor="let log of logScan" class="flex flex-row gap-2 align-items-center w-15rem p-2 {{log.style}}">
+                <img src="api/image/{{log.photo}}" alt="รูปบัณฑิต" height="64" (error)="imageService.defaultImage($event)">
+
+                <div class="flex flex-column">
+                    <span>{{log.name}}</span>
+                    <span>ลำดับที่ {{log.rowfaculty}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-column align-items-center">
+            <h3>พิธีการเข้ารับพระราชทานปริญญาบัตร</h3>
+            <p>มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี</p>
+            <p>{{title}}</p>
+            <img src="api/image/{{std.photo}}" alt="รูปบัณฑิต" height="200" (error)="imageService.defaultImage($event)">
+            <p>รับปริญญา{{subtitle}}</p>
+            <p>ชื่อ-สกุล {{std.prefixname}} {{std.name}} <span *ngIf="std.award" class="font-bold">(เหรียญ{{std.award}})</span>
+            <p>รหัสนักศึกษา {{std.id}}</p>
+            <p>สาขา {{std.faculty}}</p>
+            <p>{{std.degree}}</p>
+            <p *ngIf="std.honor">เกียรตินิยมอันดับ {{std.honor}}</p>
+            <p>ลำดับรอบ {{std.row}} ลำดับในคณะ {{std.rowfaculty}}</p>
+        </div>
+    </p-fieldset>
+</div>

@@ -1,0 +1,31 @@
+<div class="m-5">
+    <p-fieldset legend="ประวัติการเข้าซ้อม">
+
+        <div class="flex flex-warp flex-column align-items-center">
+
+            <p-table [value]="events" [rowHover]="true">
+    
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>รายการซ้อม</th>
+                        <th>สาถานะ</th>
+                    </tr>
+                </ng-template>
+    
+                <ng-template pTemplate="body" let-event>
+                    <tr>
+                        <td>
+                            <span>{{event.name}}</span>
+                        </td>
+                        <td>
+                            <span class="font-bold text-{{['green', 'yellow', 'red'][event.passed]}}-500">{{event.passed | scanStatus}}</span>
+                        </td>
+                    </tr>
+                </ng-template>
+    
+            </p-table>
+            
+        </div>
+
+    </p-fieldset>
+</div>
